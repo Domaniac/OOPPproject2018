@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+table,th,td{border:1px solid black;border-collapse: collapse;}
+th,td{padding:15px;text-align: center}
+#SearchForSchool{display:none;}
+#SearchForTeacher{display:none;}
+#SearchBySchoolName{color:blue;}
+#Search_name{color:blue;}
+#AdScores{display:none;}
+#TerReq{display:none}
+#Directory{display:none}
+</style>
+<script>
+    var For="";
+    var category="none";
+    var schoolSelect='SearchBySchoolName';
+    var TeacherSelect='Search_name';
+function selectSearch(select,activate,other){
+    var clicked=document.getElementById(select);
+    var on=document.getElementById(activate);
+    var off=document.getElementById(other);
+    on.style.display="block";
+    on.disabled=false;
+    if (off!=null) {
+        off.style.display = "none";
+        off.disabled = true;
+
+    }
+    clicked.style.color="brown";
+    if (activate==="SearchForSchool")
+        category="schools";
+    else{
+        if(activate==="SearchForTeacher"){
+            category="teachers";
+        }
+    }
+}
+function Searchfor(by,click){
+    For=by;
+    select=document.getElementById('searchbar_input');
+    select.setAttribute('onchange',function(){searchbar(by)});
+    select.placeholder="Search by "+For+"....";
+    feedback=document.getElementById(click);
+    feedback.style.color="blue";
+    feedback.disabled=true;
+    if (category==="schools"){
+        on=document.getElementById(schoolSelect);
+        on.style.display="inline-block";
+        on.disabled=false;
+        on.style.color="black";
+        schoolSelect=click;
+    }
+    else{
+        on=document.getElementById(TeacherSelect);
+        on.style.display="inline-block";
+        on.disabled=false;
+        on.style.color="black";
+        TeacherSelect=click;
+    }
+}
+function searchbar(by){
+    table=document.getElementById("Directory");
+    table.style.display="block";
+    if (category==="teachers"){
+
+    }
+    else{
+        if (category==="schools"){
+
+        }
+    }
+}
+function reset(){
+    table=document.getElementById("Directory");
+    table.style.display="none";
+    table.innerHTML="";
+}
+</script>
+<body>
+<div id="Search">
+<div id="SearchBy">
+    <button id="SearchBySchool" onclick=selectSearch("SearchBySchool","SearchForSchool","SearchForTeacher")>Search for schools</button>
+    <button id="SearchByTeacher" onclick=selectSearch("SearchByTeacher","SearchForTeacher","SearchForSchool")>Search for teachers</button>
+</div>
+<div id="SearchForSchool" disabled>
+    <button id="SearchBySchoolName" onclick=Searchfor('name','SearchBySchoolName')>Search by name</button>
+    <button id="SearchBySchoolZone" onclick=Searchfor('zone','SearchBySchoolZone')>Search by zone</button>
+    <button id="SearchBySchoolAddress" onclick="Searchfor('address','SearchBySchoolAddress')">Search by address</button>
+    <button id="SearchBySchoolAdmission" onclick=selectSearch("SearchBySchoolAdmission","AdScores","")>search by Admission score</button>
+    <div id="AdScores" disabled>
+        <button id="ForSecondary" onclick="Searchfor('PSLE','ForSecondary')">For Secondary schools PSLE Score</button>
+        <button id="ForTertiary" onclick=selectSearch("ForTertiary","TerReq","")>For Tertiary institutes</button>
+        <div id="TerReq" disabled>
+            <button id="L1R5" onclick="Searchfor('L1R5','L1R5')">L1R5</button>
+            <button id="L1R4" onclick="Searchfor('L1R4','L1R4')">L1R4</button>
+        </div>
+    </div>
+</div>
+<div id="SearchForTeacher" disabled>
+    <button id="Search_fac" onclick="Searchfor('faculty','Search_fac')">Search by faculty</button>
+    <button id="Search_name" onclick="Searchfor('name','Search_name')">Search by name</button>
+</div>
+    <button id="reset" onclick="reset()">Reset</button>
+    <br>
+<input type="text" id="searchbar_input" onchange="searchbar(name)" placeholder="Search by name...">
+</div>
+<table id="Directory" width=100%>
+</table>
+</body>
+</html>
