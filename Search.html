@@ -65,9 +65,11 @@
                     }
                 }
                 if (check===1) {
-                    if (list[i].toUpperCase().indexOf(filter) ===filter.length){
-                        count=(list[i].match(/o/g) || []).length;
-                        displayed[list[i]]=count;
+                    if (list[i].toUpperCase().indexOf(filter) !== -1) {
+                        var regex=new RegExp(filter.toUpperCase(),'g');
+                        counting=list[i].toUpperCase();
+                        count = (counting.match(regex) || []).length;
+                        displayed[list[i]] = count;
                     }
                 }
             }
