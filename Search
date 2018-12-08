@@ -22,55 +22,70 @@
         #SearchByTeachers{display:inline-block;color:blue;}
     </style>
     <script>
-        var Tealist=[];
+                var Tealist=['John','Samuel','Dog','Woof'];
+        //for (k in '{{ teachers }}'){
+            //Tealist.push(k.name)
+        //}
         var Schoolist=[];
-        var dict={Placeholder:'#',schoolp:'#',placeholder:'#'};
+        //for (k in '{{ schools }}'){
+            //Schoolist.push(k.name)
+        //}
+        Tealist.sort();
+        Schoolist.sort();
+        var displayed={};
         function searchbar(variable) {
             var input, filter, ul, li, a, i;
             input=document.getElementById('searchbar_input');
             filter=input.value.toUpperCase();
             ul=document.getElementById("lists");
-            li=Object.keys(dict);
-            list="placeholder";
+            var list="placeholder";
+            if (filter===""){
+                displayed={};
+                document.getElementById("lists").innerHTML='';
+                document.getElementById("lists").style.display="none";
+                return
+            }
             if (variable==="schools"){
-                list=schoolist
+                list=Schoolist
             }
             else {
                 if (variable === "teachers"){
-                    list = schoolist
+                    list = Tealist
                 }
             }
-            for (i=0;i<li.length;i++){
+            document.getElementById("lists").innerHTML='';
+            document.getElementById("lists").style.display="none";
+            for (i=0;i<list.length;i++){
                 check=1;
-                if (list.length!==0) {
+                if (displayed.length!==0) {
                     for (k = 0; k < list.length; k++) {
-                        if (li[i] === list[k]) {
+                        if (displayed[i] === list[k]) {
                             check = 0
                         }
                     }
                 }
                 if (check===1) {
-                    if (li[i].toUpperCase().indexOf(filter) > -1) {
-                        node = document.createElement("LI");
-                        link = document.createElement("A");
-                        keylink = dict[li[i]];
-                        link.href = keylink;
-                        text = document.createTextNode(li[i]);
-                        link.appendChild(text);
-                        node.appendChild(link);
-                        ul.appendChild(node);
-                        Tealist.push(li[i]);
+                    if (list[i].toUpperCase().indexOf(filter) ===filter.length){
+                        count=(list[i].match(/o/g) || []).length;
+                        displayed[list[i]]=count;
                     }
                 }
             }
+            display=Object.keys(displayed).map(function(key){return[key,displayed[key]]});
+            display=display.sort(function(a,b){return b[1]-a[1];});
+            for (k in display){
+                 node = document.createElement("LI");
+                 link = document.createElement("A");
+                 keylink = display[k][0];
+                 link.href = keylink;
+                 text = document.createTextNode(display[k][0]);
+                 link.appendChild(text);
+                 node.appendChild(link);
+                 ul.appendChild(node);
+            }
             ul.style.display="block";
         }
-        function sort() {
-
-        }
         function clear(){
-            schoolist=[];
-            Tealist=[];
             document.getElementById("lists").innerHTML='';
             document.getElementById("lists").style.display="none";
             alert('reset');
@@ -87,7 +102,6 @@
             change=document.getElementById('searchbar_input');
             change.setAttribute('onchange',function(){searchbar('teachers')});
             change.placeholder="search for teachers by name..."
-
         }
         function searchbySchool() {
             clicked=document.getElementById("SearchBySchool");
