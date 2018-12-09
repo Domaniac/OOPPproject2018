@@ -38,10 +38,12 @@ class teachers(db.Model):
     category=db.Column(db.String(100))
     name=db.Column(db.String(100))
     faculty=db.Column(db.String(300))
-    def __init__(self,category,name,faculty):
+    school=db.Column(db.String(300))
+    def __init__(self,category,name,faculty,school):
         self.name=name
         self.faculty=faculty
         self.category=category
+        self.school=school
 #Creating database
 db.create_all()
 @app.route("/",methods={'GET',"POST"})
@@ -99,7 +101,8 @@ def add():
             teacher=teachers(
              'Teachers',
              request.form['name'],
-             request.form['faculty'])
+             request.form['faculty'],
+             request.form['school'])
             db.session.add(teacher)
             db.session.commit()
     return render_template("new.html")
