@@ -80,37 +80,37 @@ class teachers(db.Model):
 #Initating SQL
 db.create_all()
 @app.route("/",methods={'GET',"POST"})
-def home():
-    users=user.query.email()
-    if request.method=='GET':
-        #change to template for  putting in email
-        return render_template('Forgot_Password.html')
-    #Gets email entered in above form
-    email=request.form['email']
-    #Adds token
-    check=1
-    for user in users:
-        if email==user:
-            check=0
-    if check==0:
-      token=timer.dumps(email,salt='email-confirm')
-      #Creates and sends message
-      msg=Message('Confirm Email',sender='damienchew2001@gmail.com',recipients=[email])
-      link=url_for('confirm_email',token=token,external=True)
-      msg.body="your link is {}".format(link)
-      mail.send(msg)
-      #Should send an alert for feedback
-      return 'The email you entered is {}.The token is {}'.format(email,token)
-    else:
-        return "Email does not belong to any account"
+def Forgot_Password():
+    message=None
+    if request.method=='POST':
+        ##user=db.session.query(users.email).all()
+        user=['182290Q@mymail.nyp.edu.sg']
+        email=request.form['email']
+        check=1
+        for u in user:
+            if u==email:
+                check=0
+        if check==0:
+            token = timer.dumps(email, salt='email-confirm')
+            msg = Message('Password reset', sender='damienchew2001@gmail.com', recipients=[email])
+            link = url_for('Change_Password', token=token, external=True)
+            msg.body = "your link is 127.0.0.1:5000{}".format(link)
+            mail.send(msg)
+            # Should send an alert for feedback
+            message='The email you entered is {}.The token is {}'.format(email, token)
+        else:
+            message="Email does not match with any known user."
+    # change to template for  putting in email
+    return render_template('Forgot_Password.html',message=message)
 
-@app.route("/confirm_email/<token>")
-def confirm_email(token):
+@app.route("/Forgot_Password/confirm_email/<token>")
+def Change_Password(token):
+    check=0
     try:
       email=timer.loads(token,salt='email-confirm',max_age=100)
     except SignatureExpired:
-        return "<h1>The token is expired</h1>"
-    return "the token works"
+        check=1
+    return render_template("Change_Password.html",expired=check)
 
 @app.route("/search")
 def search():
