@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Search bar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <style>
         body{margin:0}
         .searchbar{position:relative;display:inline-block;}
@@ -23,12 +24,14 @@
     </style>
     <script>
         var Tealist=['John','Samuel','Dog','Woof'];
+        //var Tealist=[];
         //for (k in '{{ teachers }}'){
-            //Tealist.push(k)
+            //Tealist.push('{{ teachers }}'[k]);
         //}
-        var Schoolist=[];
+        var Schoolist=['John','Samuel','Dog','woof'];
+        //var Schoolist=[];
         //for (k in '{{ schools }}'){
-            //Schoolist.push(k)
+            //Schoolist.push('{{ schools }}'[k]);
         //}
         Tealist.sort();
         Schoolist.sort();
@@ -121,6 +124,9 @@
     </script>
 </head>
 <body>
+{% include 'includes/navbar.html' %}
+    <div class="container">
+        {% block body %}{% endblock %}
 <div class="searchbar">
     <button id="SearchByTeachers" onclick="searchByTeachers()" disabled>For Teachers</button>
     <button id="SearchBySchool" onclick="searchbySchool()">For schools</button>
@@ -128,7 +134,10 @@
     <button onclick="clear()" >reset</button>
     <ul id="lists">
     </ul>
-    <a class="advanced_search" href="{{ advanced_search }}">advanced search</a>
+    <a class="advanced_search" href='{{ advanced_search }}'>advanced search</a>
 </div>
+        {% include 'includes/footer.html' %}
+    </div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
