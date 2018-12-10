@@ -14,11 +14,12 @@ th,td{padding:15px;text-align: center}
 #AdScores{display:none;}
 #Directory{display:none}
 </style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script>
-    var school1={name:'SClass',zone:'North',addr:'oo',PSLE:'',L1R5:16,L1R4:''};
-    var school2={name:'Edog',zone:'West',addr:'o',PSLE:'',L1R5:'',L1R4:8};
-    var school3={name:'woof',zone:'South',addr:'d',PSLE:'',L1R5:'',L1R4:12};
-    var school4={name:'Shadow',zone:'East',addr:'s',PSLE:226,L1R5:12,L1R4:15};
+    var school1={name:'SClass',zone:'North',address:'oo',PSLE:'',L1R5:16,L1R4:''};
+    var school2={name:'Edog',zone:'West',address:'o',PSLE:'',L1R5:'',L1R4:8};
+    var school3={name:'woof',zone:'South',address:'d',PSLE:'',L1R5:'',L1R4:12};
+    var school4={name:'Shadow',zone:'East',address:'s',PSLE:226,L1R5:12,L1R4:15};
     var schools=[school1,school2,school3,school4];
      //for (k in '{{ schools }}')
         //schools.push(k);
@@ -278,9 +279,9 @@ function searchbar(by) {
                                 }
                             }
                             if (check === 1) {
-                                if (list[k].addr.toUpperCase().indexOf(input.toUpperCase()) > -1) {
+                                if (list[k].address.toUpperCase().indexOf(input.toUpperCase()) > -1) {
                                     match = new RegExp(input.toUpperCase(),'g');
-                                    count = (list[k].addr.toUpperCase().match(match) || []).length;
+                                    count = (list[k].address.toUpperCase().match(match) || []).length;
                                     displayed[list[k].name] = count;
                                 }
                             }
@@ -389,7 +390,7 @@ function searchbar(by) {
                 var zoneText=document.createTextNode(schoolObjects[display[k][0]].zone);
                 zone.appendChild(zoneText);
                 var address=document.createElement('TD');
-                var addressText=document.createTextNode(schoolObjects[display[k][0]].addr);
+                var addressText=document.createTextNode(schoolObjects[display[k][0]].address);
                 address.appendChild(addressText);
                 if (by==='L1R5'){
                     var adscore=document.createElement('TD');
@@ -429,6 +430,9 @@ function reset(){
 }
 </script>
 <body>
+    {% include 'includes/navbar.html' %}
+    <div class="container">
+        {% block body %}{% endblock %}
 <div id="Search">
 <div id="SearchBy">
     <button id="SearchBySchool" onclick=selectSearch("SearchBySchool","SearchForSchool","SearchForTeacher")>Search for schools</button>
@@ -456,5 +460,8 @@ function reset(){
 </div>
 <table id="Directory" width=100%>
 </table>
+    {% include 'includes/footer.html' %}
+    </div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
