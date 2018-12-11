@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Dom's 3rd attempt at WTForm</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <noscript>
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/noscript.css') }}"/>
+    </noscript>
+</head>
+<body class="is-preload">
+
+<header id="header">
+    <a href="index.html" class="title">Glassdoor Ripoff</a>
+    <nav>
+        <ul>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class=flashes>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <li><a href="/index">Home</a></li>
+            <li><a href="">This does nothing</a></li>
+            <li><a href="">Placeholder</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                <li><a href="#two">School name</a></li>
+                <li><a href="#three">View Reviews</a></li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <section id="two" class="wrapper style3 fade-up">
+        <div class="inner">
+            <h2>Nanyang Polytechnic</h2>
+            <p>School description</p>
+            <div class="features">
+                <section>
+                    <span class="icon major fa-wheelchair"></span>
+                    <h3>Wheelchair accessable</h3>
+                    <p>This school has consistantly been rated Wheelchair accessable</p>
+                </section>
+                <section>
+                    <span class="icon major fa-lock"></span>
+                    <h3>Generic sticker rating 2</h3>
+                    <p>Rating sticker Description</p>
+                </section>
+            </div>
+            <ul class="actions">
+                <li><a href="ReviewForm1.html" class="button">Submit a review!</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="three" class="wrapper">
+        <div class="inner">
+            <h1 class="major">User reviews</h1>
+            <span class="heading">User Rating</span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <p>4 average based on 87 reviews.</p>
+            <hr style="border:3px solid #f1f1f1">
+
+            <div class="row">
+                <div class="side">
+                    <div>5 star</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-5"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>40</div>
+                </div>
+                <div class="side">
+                    <div>4 star</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-4"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>20</div>
+                </div>
+                <div class="side">
+                    <div>3 star</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-3"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>10</div>
+                </div>
+                <div class="side">
+                    <div>2 star</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-2"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>3</div>
+                </div>
+                <div class="side">
+                    <div>1 star</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-1"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>14</div>
+                </div>
+            </div>
+            <span>Sort by:</span>
+            <div class="row gtr-uniform">
+                <div class="col-4 col-12-small">
+                    <input type="radio" id="demo-priority-low" name="demo-priority" checked>
+                    <label for="demo-priority-low">No filtering</label>
+                </div>
+                <div class="col-4 col-12-small">
+                    <input type="radio" id="demo-priority-normal" name="demo-priority">
+                    <label for="demo-priority-normal">Parent reviews only</label>
+                </div>
+                <div class="col-4 col-12-small">
+                    <input type="radio" id="demo-priority-high" name="demo-priority">
+                    <label for="demo-priority-high">Student reviews only</label>
+                </div>
+                <span>Additional filters:</span>
+                <div class="col-6 col-12-small">
+                    <input type="checkbox" id="demo-human" name="demo-human" checked>
+                    <label for="demo-human">remove Anonymous reviews</label>
+                </div>
+            </div>
+            <p>This is Review 1</p>
+            <h3>Review title: {{ request.form['review_title'] }} by: {{ request.form['preferred_name'] }}</h3>
+            <blockquote>{{ request.form['review_body'] }}</blockquote>
+            <p>Final Rating: {{ request.form['review_rating'] }}</p>
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<footer id="footer" class="wrapper style1-alt">
+    <div class="inner">
+        <ul class="menu">
+            <li>Done by Dom Loh. Template credit in README</li>
+        </ul>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="{{ url_for('static', filename="js/jquery.min.js") }}"></script>
+<script src="{{ url_for('static', filename="js/jquery.scrollex.min.js") }}"></script>
+<script src="{{ url_for('static', filename="js/jquery.scrolly.min.js") }}"></script>
+<script src="{{ url_for('static', filename="js/browser.min.js") }}"></script>
+<script src="{{ url_for('static', filename="js/breakpoints.min.js") }}"></script>
+<script src="{{ url_for('static', filename="js/util.js") }}"></script>
+<script src="{{ url_for('static', filename="js/main.js") }}"></script>
+
+</body>
+</html>
