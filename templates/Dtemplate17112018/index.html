@@ -69,7 +69,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
             </div>
             <ul class="actions">
                 <li><a href="ReviewForm1" class="button">Submit a review!</a></li>
-                <li><a href="ReviewForm1" class="button">Edit a review!</a></li>
+                <li><a href="IDForm" class="button">Edit a review!</a></li>
             </ul>
         </div>
     </section>
@@ -163,12 +163,14 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                     <label for="demo-human">remove Anonymous reviews</label>
                 </div>
             </div>
-            {% for i in user_name %}
-                <p>This is Review {{ loop.index }}</p>
-            <h3>Review title: {{ user_rtitle[loop.index] }} by: {{ user_name[loop.index] }}</h3>
-            <blockquote>{{ request.form['review_body'] }}</blockquote>
-            <p>Final Rating: {{ request.form['review_rating'] }}</p>
-            {% endfor %}
+            <section>
+                {% for i in user_name %}
+                    <p>This is Review {{ loop.index }}</p>
+                    <h3>Review title: {{ user_rtitle[loop.index-1] }} by: {{ user_name[loop.index] }}</h3>
+                    <blockquote>{{ user_rbody[loop.index] }}</blockquote>
+                    <p>Final Rating: {{ user_rating[loop.index] }}</p>
+                {% endfor %}
+            </section>
         </div>
     </section>
 

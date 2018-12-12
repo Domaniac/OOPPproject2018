@@ -11,7 +11,7 @@ preferred_name = ""
 review_title = ""
 review_body = ""
 review_rating = 0
-
+currentuserid = 0
 
 class SignupForm(Form):
     preferred_name = StringField('Preferred name', validators=[DataRequired("Enter name")])
@@ -29,6 +29,7 @@ class SignupForm(Form):
     # 'Courses and subjects offered')],
     # validators=[DataRequired("Enter Review body")])
     users_id = user_id # for app.py to flash current user id
+    current_review_id = user_id
     submit = SubmitField('Submit Review')
 
 

@@ -1,0 +1,38 @@
+{% extends "Dtemplate17112018/layout.html" %}
+{% block content %}
+    <main class="container signup-section">
+        <div class="section-content">
+            <h2>Editing Review</h2>
+            <form method="POST" action="/EditReviewForm1.html">
+                <div class="row gtr-uniform">
+                    <div class="col-6 col-12-xsmall">
+                        <!--{{ form.preferred_name.label }} -->
+                        {{ form.preferred_name(value=user_name[user_id+ 1]) }}
+                    </div>
+                    <div class="col-6 col-12-xsmall">
+                        <!--{{ form.review_title.label }} -->
+                        {{ form.review_title(value=user_rtitle[user_id+ 1]) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form.review_body.label }}
+                        {{ form.review_body(default=user_rbody[user_id+ 1]) }}
+                    </div>
+                    <div class="col-6 col-12-small">
+                        {{ form.review_rating.label }}
+                        {{ form.review_rating(default=user_rating[user_id+ 1]) }}
+                    </div>
+                    <div class="col-6 col-12-small">
+                        {{ form.review_tags.label }}
+                        {{ form.review_tags }}
+                    </div>
+                    <div class="col-6 col-12-small">
+                        id: {{ user_id }}
+                    </div>
+                    <div class="col-12">
+                        {{ form.submit(class="btn-primary") }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}

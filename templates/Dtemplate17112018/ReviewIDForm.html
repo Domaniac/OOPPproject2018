@@ -1,0 +1,19 @@
+{% extends "Dtemplate17112018/layout.html" %}
+{% block content %}
+    <main class="container signup-section">
+        <div class="section-content">
+            <h2>Enter review ID to edit your review</h2>
+            <form method="POST" action="/IDForm_redirect">
+                <div class="row gtr-uniform">
+                    <div class="col-6 col-12-xsmall">
+                        <!--{{ form1.user_review_id.label }} -->
+                        {{ form1.user_review_id(placeholder="Review ID") }}
+                    </div>
+                    <div class="col-12">
+                        {{ form1.submit(class="btn-primary") }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}
