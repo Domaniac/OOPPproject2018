@@ -1,0 +1,18 @@
+{% extends 'directory_layout.html' %}
+{% block body %}
+    <div class = "content-section">
+        <form method="POST" action={{ url_for('new_directory') }}>
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"> Add Your School </legend>
+                <div class="form-group">
+                {{ form.name.label(class="form-control-label") }}
+                {{ form.name(class="form-control-lg") }}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{% endblock %}

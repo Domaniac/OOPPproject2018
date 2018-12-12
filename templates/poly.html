@@ -1,0 +1,20 @@
+{% extends "directory_layout.html"%}
+
+{% block body%}
+    {%  for schools in schools %}
+        <article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+     <a class=" article-title" href="{{ schools.name }}">{{ schools.name }}</a>
+    </div>
+  </div>
+</article>
+    {%  endfor %}
+    <div>
+        <h2>Is your School here? No?</h2>
+         <form method="get" action="/new">
+            <button type="submit">Add Your School</button>
+        </form>
+    </div>
+
+{% endblock %}
