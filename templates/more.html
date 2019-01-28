@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>more</title>
+</head>
+<body>
+<form method='post' enctype='multipart/form-data' action=" {{ request.path }} ">
+    <input type="text" name="name" placeholder="Enter school name">
+    <input type=file name="photo">
+    <textarea name="bio"></textarea>
+    <textarea name="achieve"></textarea>
+    <input type="submit">
+</form>
+</body>
+</html>
